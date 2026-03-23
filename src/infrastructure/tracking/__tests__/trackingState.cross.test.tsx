@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
-  isFilteredSession,
+  getIsFilteredSession,
   resetIsFilteredSession,
   resetDetailPageState,
   resetSearchPageState,
@@ -50,13 +50,13 @@ describe("검증 5 — trackingState 교차 검증", () => {
       ),
     });
     result.current.trackFilterApplyButtonClicked("서울", "");
-    expect(isFilteredSession).toBe(true);
+    expect(getIsFilteredSession()).toBe(true);
     result.current.trackFestivalItemClicked("P", "n", 0);
   });
 
   it("필터 미적용 시 is_filtered_session false", () => {
     resetIsFilteredSession();
-    expect(isFilteredSession).toBe(false);
+    expect(getIsFilteredSession()).toBe(false);
   });
 
   it("resetDetailPageState 후 sections/review 초기화", () => {

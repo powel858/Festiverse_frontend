@@ -5,7 +5,11 @@ let _searchPageEnteredAt = 0;
 let _searchAccumulatedTime = 0;
 let _searchLastActiveAt = 0;
 let _searchExitSent = false;
-export let isFilteredSession = false;
+let _isFilteredSession = false;
+
+export function getIsFilteredSession(): boolean {
+  return _isFilteredSession;
+}
 
 // --- 상세 페이지 상태 ---
 let _detailPageEnteredAt = 0;
@@ -141,9 +145,9 @@ export function markReviewClicked(): void {
 // --- 필터 세션 ---
 
 export function markFilteredSession(): void {
-  isFilteredSession = true;
+  _isFilteredSession = true;
 }
 
 export function resetIsFilteredSession(): void {
-  isFilteredSession = false;
+  _isFilteredSession = false;
 }

@@ -6,7 +6,7 @@ import {
   getReturnVisitInfo,
   updateLastVisitDate,
 } from "../trackingUtils";
-import { isFilteredSession, markFilteredSession } from "../trackingState";
+import { getIsFilteredSession, markFilteredSession } from "../trackingState";
 import { clearTrackingStorage, resetTrackingModules } from "./testUtils";
 
 describe("검증 1 — trackingUtils (세션/사용자 식별)", () => {
@@ -36,7 +36,7 @@ describe("검증 1 — trackingUtils (세션/사용자 식별)", () => {
     expect(first).toBeTruthy();
 
     markFilteredSession();
-    expect(isFilteredSession).toBe(true);
+    expect(getIsFilteredSession()).toBe(true);
 
     localStorage.setItem(
       "festiverse_last_activity",
@@ -45,7 +45,7 @@ describe("검증 1 — trackingUtils (세션/사용자 식별)", () => {
 
     const second = getOrCreateSessionId();
     expect(second).not.toBe(first);
-    expect(isFilteredSession).toBe(false);
+    expect(getIsFilteredSession()).toBe(false);
   });
 
   it("getDeviceType: width < 1024 → mobile, ≥ 1024 → desktop", () => {

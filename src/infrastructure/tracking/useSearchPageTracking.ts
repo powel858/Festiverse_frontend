@@ -16,7 +16,7 @@ import {
   markSearchExitSent,
   resetSearchExitSent,
   markFilteredSession,
-  isFilteredSession,
+  getIsFilteredSession,
 } from "./trackingState";
 import { filterAtom } from "@/features/performance/application/atoms/performanceAtoms";
 
@@ -156,7 +156,7 @@ export function useSearchPageTracking() {
           selected_date: filters.selectedDate || null,
           keyword: filters.keyword,
         },
-        is_filtered_session: isFilteredSession,
+        is_filtered_session: getIsFilteredSession(),
         time_since_page_entered_ms: getTimeSinceSearchPageEntered(),
       });
     },

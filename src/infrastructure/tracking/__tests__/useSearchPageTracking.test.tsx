@@ -7,7 +7,7 @@ import { EVENT_TYPES } from "../constants";
 import { filterAtom } from "@/features/performance/application/atoms/performanceAtoms";
 import { initialFilterState } from "@/features/performance/domain/state/filterState";
 import {
-  isFilteredSession,
+  getIsFilteredSession,
   markFilteredSession,
   resetIsFilteredSession,
 } from "../trackingState";
@@ -59,14 +59,14 @@ describe("검증 3 — useSearchPageTracking", () => {
 
     it("trackFilterApplyButtonClicked + isFilteredSession = true", () => {
       resetIsFilteredSession();
-      expect(isFilteredSession).toBe(false);
+      expect(getIsFilteredSession()).toBe(false);
       const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
       const store = createStore();
       const { result } = renderHook(() => useSearchPageTracking(), {
         wrapper: wrapper(store),
       });
       result.current.trackFilterApplyButtonClicked("서울", "EDM");
-      expect(isFilteredSession).toBe(true);
+      expect(getIsFilteredSession()).toBe(true);
       const payload = logSpy.mock.calls.find((c) => c[0] === "[TrackEvent]")?.[1] as Record<
         string,
         unknown
